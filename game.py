@@ -83,7 +83,7 @@ class Rogue():
         self.health_points = 100
         self.attack_points = 250
         self.magic_points = 10
-        self.location = 'start'
+        self.location = 'a1'
         self.game_over = False
 myPlayer = Rogue()
 
@@ -101,7 +101,7 @@ def title_screen_selections():
     while option.lower() not in ['play' , 'help' , 'quit']:
         print("Please enter a valid command")
         if option.lower() == ("play"):
-            start_game()
+            setup_game()
         elif option.lower() == ("help"):
             help_menu()
         elif option.lower() == ("quit"):
@@ -283,7 +283,7 @@ zonemap = {
 def print_location():
     print('\n' + ('#' * (4 + len(myPlayer.location))))
     print('#' + myPlayer.location.upper() + '#')
-    print('#' + zonemap[myPlayer.location][DESCRPTION] + '#')
+    print('#' + zonemap[myPlayer.location][DESCRIPTION] + '#')
     print('\n' + ('#' * (4 + len(myPlayer.location))))
 
 def prompt():
@@ -300,7 +300,7 @@ def prompt():
     elif action.lower() in ['examine', 'inspect', 'intersact', 'look']:
         player_examine(action.lower())
 
-def player_move():
+def player_move(myAction):
     ask = "Where would you like to move to?\n"
     dest = input(ask)
     if dest in ['up', 'north']:
@@ -327,10 +327,6 @@ def player_examine(action):
         print("You have already exhausted this zone.")
     else:
         print("Trigger puzzle here")
-
-def start_game():
-    return
-
 
 #### Game Functionality ####
 def main_game_loop():
@@ -368,10 +364,10 @@ def setup_game():
     player_name = input(">")
     myPlayer.name = player_name
 
-    speech1 = "Welcome to this fantasy world!"
-    speech2 = "I hope its greets you well!"
-    speech3 = "Just make sure you don't get too lost...!"
-    speech4 = "HEHEHEHEHEH....."
+    speech1 = "Welcome to this fantasy world!\n"
+    speech2 = "I hope its greets you well!\n"
+    speech3 = "Just make sure you don't get too lost...!\n"
+    speech4 = "HEHEHEHEHEH.....\n"
     for character in speech1:
         sys.stdout.write(character)
         sys.stdout.flush()
@@ -389,6 +385,11 @@ def setup_game():
         sys.stdout.flush()
         time.sleep(0.05)
 
+    os.system("clear")
+    print("##########################")
+    print("#    Let the game begin! #")
+    print("##########################")
+    main_game_loop()
 
 
 
