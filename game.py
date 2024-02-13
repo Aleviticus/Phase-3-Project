@@ -83,9 +83,9 @@ class Rogue():
         self.health_points = 100
         self.attack_points = 250
         self.magic_points = 10
-        self.location = location
+        self.location = 'start'
         self.game_over = False
-        myplayer = myPlayer()
+myPlayer = Rogue()
 
 
 #### Title Screen ####
@@ -93,7 +93,7 @@ class Rogue():
 def title_screen_selections():
     option = input("> ")
     if option.lower() == ("play"):
-        start_game()
+        setup_game()
     elif option.lower() == ("help"):
         help_menu()
     elif option.lower() == ("quit"):
@@ -300,21 +300,21 @@ def prompt():
     elif action.lower() in ['examine', 'inspect', 'intersact', 'look']:
         player_examine(action.lower())
 
-def player_move(move):
-    ask = "Where would you like to miove to?\n"
+def player_move():
+    ask = "Where would you like to move to?\n"
     dest = input(ask)
     if dest in ['up', 'north']:
         destination = zonemap[myPlayer.location][UP]
-        movement_handler()
+        movement_handler(destination)
     elif dest in ['left', 'west']:
         destination = zonemap[myPlayer.location][LEFT]
-        movement_handler()
+        movement_handler(destination)
     elif dest in ['right', 'east']:
         destination = zonemap[myPlayer.location][RIGHT]
-        movement_handler()
+        movement_handler(destination)
     elif dest in [ 'down', 'south' ]:
         destination = zonemap[myPlayer.location][DOWN]
-        movement_handler()
+        movement_handler(destination)
 
 
 def movement_handler(destination):
@@ -328,6 +328,8 @@ def player_examine(action):
     else:
         print("Trigger puzzle here")
 
+def start_game():
+    return
 
 
 #### Game Functionality ####
@@ -335,27 +337,59 @@ def main_game_loop():
     while myPlayer.game_over is False:
         prompt()
 
-        def setup_game():
-            os.system('clear')
+def setup_game():
+    os.system('clear')
 
-            q1 = "Hello, what's your name?\n"
-            for character in q1:
-                sys.stdout.write(character)
-                sys.stdout.flush()
-                time.sleep(0.01)
-            player_name = input("> ")
-            player.name = player_name
+    q1 = "Hello, what's your name?\n"
+    for character in q1:
+        sys.stdout.write(character)
+        sys.stdout.flush()
+        time.sleep(0.01)
+    player_name = input("> ")
+    myPlayer.name = player_name
 
-            q2 = "What role are you?\n"
-            for character in q1:
-                sys.stdout.write(character)
-                sys.stdout.flush()
-                time.sleep(0.05)
-            player_role = input("> ")
-            valid_roles = [warrior, mage, rogue, priest, hunter]
-            if player_role.lower() in valid_roles:
-                myPlayer.role = player_role
-                print("You are now a " + player_job + "\n")
+    q2 = "What role are you?\n"
+    for character in q2:
+        sys.stdout.write(character)
+        sys.stdout.flush()
+        time.sleep(0.05)
+    player_role = input("> ")
+    valid_roles = ["warrior", "mage", "rogue", "priest", "hunter"]
+    if player_role.lower() in valid_roles:
+        print("You are now a " + player_role + "!\n")
+        myPlayer.role = player_role
+    
+
+    q3 = "Welcome, " + player_name + " the " + player_role
+    for character in q3:
+        sys.stdout.write(character)
+        sys.stdout.flush()
+        time.sleep(0.05)
+    player_name = input(">")
+    myPlayer.name = player_name
+
+    speech1 = "Welcome to this fantasy world!"
+    speech2 = "I hope its greets you well!"
+    speech3 = "Just make sure you don't get too lost...!"
+    speech4 = "HEHEHEHEHEH....."
+    for character in speech1:
+        sys.stdout.write(character)
+        sys.stdout.flush()
+        time.sleep(0.05)
+    for character in speech2:
+        sys.stdout.write(character)
+        sys.stdout.flush()
+        time.sleep(0.05)
+    for character in speech3:
+        sys.stdout.write(character)
+        sys.stdout.flush()
+        time.sleep(0.05)   
+    for character in speech4:
+        sys.stdout.write(character)
+        sys.stdout.flush()
+        time.sleep(0.05)
+
+
 
 
 
