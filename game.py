@@ -13,11 +13,13 @@ screen_width = 100
 class Player():
 
     def __init__(self):
+
         self.name = ""
         self.role = ""
         self.health_points = 0
         self.attack_points = 0
         self.magic_points = 0
+
         self.location = 'a1'
         self.game_over = False
 
@@ -246,7 +248,7 @@ def prompt():
     elif action.lower() in ['examine', 'inspect', 'intersact', 'look']:
         player_examine(action.lower())
 
-def player_move():
+def player_move(myAction):
     ask = "Where would you like to move to?\n"
     dest = input(ask)
     if dest in ['up', 'north']:
@@ -273,6 +275,7 @@ def player_examine(action):
         print("You have already exhausted this zone.")
     else:
         print("Trigger puzzle here")
+
 
 
 
@@ -365,6 +368,11 @@ def setup_game():
     print('#########################')
     main_game_loop()
 
+    os.system("clear")
+    print("##########################")
+    print("#    Let the game begin! #")
+    print("##########################")
+    main_game_loop()
 
 
 
