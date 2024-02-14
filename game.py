@@ -19,8 +19,6 @@ class Player():
         self.health_points = 0
         self.attack_points = 0
         self.magic_points = 0
-
-        self.location = 'a1'
         self.game_over = False
 
 myPlayer = Player()
@@ -80,210 +78,93 @@ def help_menu():
     print('         - Good luck and have fun!!! -')
 
 
-ZONENAME = ''
-DESCRIPTION = 'description'
-EXAMINATION = 'examine'
-SOLVED = False
-UP = 'up', 'north'
-DOWN = 'down', 'south'
-LEFT = 'left', 'west'
-RIGHT = 'right', 'east' 
-
-solved_places = { 'a1': False, 'a2': False, 'a3': False, 'a4': False,
-                  'b1': False, 'b2': False, 'b3': False, 'b4': False,
-                  'c1': False, 'c2': False, 'c3': False, 'c4': False,
-                }
 
 def enter_town():
-    print("You are at the entrance to town")
-    print("You got beat up by some baddies")
-    myPlayer.health_points -= 10
-    print(f"Your health is now {myPlayer.health_points}")
-    print("Carry on")
+    s1 = "You are at the entrance to town \n"
+    s2 ="You get greeted by the civilians\n"
+    # print(f"Your health is now {myPlayer.health_points}")
+    s3 = "They offer you to either follow them or take a piece of cake\n"
+    s4 = "What would you like to do? Take the cake or Follow the people\n"
+    for character in s1:
+        sys.stdout.write(character)
+        sys.stdout.flush()
+        time.sleep(0.01)
+    for character in s2:
+        sys.stdout.write(character)
+        sys.stdout.flush()
+        time.sleep(0.01)
+    for character in s3:
+        sys.stdout.write(character)
+        sys.stdout.flush()
+        time.sleep(0.01)   
+    for character in s4:
+        sys.stdout.write(character)
+        sys.stdout.flush()
+        time.sleep(0.1)
+    option = input("> ")
+    if "cake" in option:
+        takes_cake()
+    elif "follow" in option:
+        follow_people()
+        
 
-zonemap = {
-    'a1': {
-        ZONENAME: 'Town Entrance',
-        DESCRIPTION: 'description',
-        EXAMINATION: 'examine',
-        SOLVED: False,
-        UP: '',
-        DOWN: 'b1',
-        LEFT: '',
-        RIGHT:'a2',
-        "EVENTFN": enter_town
-    },
-    'a2': {
-        ZONENAME: '',
-        DESCRIPTION: 'description',
-        EXAMINATION: 'examine',
-        SOLVED: False,
-        UP: '',
-        DOWN: 'b2',
-        LEFT: 'a1',
-        RIGHT: 'a3',
-    },
-    'a3': {
-        ZONENAME: "",
-        DESCRIPTION: 'description',
-        EXAMINATION: 'examine',
-        SOLVED: False,
-        UP: '',
-        DOWN: 'b3',
-        LEFT: 'a2',
-        RIGHT: 'a4',
-    },
-    'a4': {
-        ZONENAME: "",
-        DESCRIPTION: 'description',
-        EXAMINATION: 'examine',
-        SOLVED: False,
-        UP: '',
-        DOWN: 'b4',
-        LEFT: 'a3',
-        RIGHT: '',
-    },
-    'b1': {
-        ZONENAME: "",
-        DESCRIPTION: 'description',
-        EXAMINATION: 'examine',
-        SOLVED: False,
-        UP: 'a1',
-        DOWN: 'c1',
-        LEFT: '',
-        RIGHT: 'b2',
-    },
-    'b2': {
-        ZONENAME: "",
-        DESCRIPTION: 'description',
-        EXAMINATION: 'examine',
-        SOLVED: False,
-        UP: 'a2',
-        DOWN: 'c2',
-        LEFT: 'b1',
-        RIGHT: 'b3',
-    },
-    'b3': {
-        ZONENAME: "",
-        DESCRIPTION: 'description',
-        EXAMINATION: 'examine',
-        SOLVED: False,
-        UP: 'a3',
-        DOWN: 'c3',
-        LEFT: 'b2',
-        RIGHT: 'b4',
-    },
-    'b4': {
-        ZONENAME: "",
-        DESCRIPTION: 'description',
-        EXAMINATION: 'examine',
-        SOLVED: False,
-        UP: 'a4',
-        DOWN: 'c4',
-        LEFT: 'b3',
-        RIGHT: '',
-    },
-    'c1': {
-        ZONENAME: "",
-        DESCRIPTION: 'description',
-        EXAMINATION: 'examine',
-        SOLVED: False,
-        UP: 'b1',
-        DOWN: '',
-        LEFT: '',
-        RIGHT: 'c2',
-    },
-    'c2': {
-        ZONENAME: "",
-        DESCRIPTION: 'description',
-        EXAMINATION: 'examine',
-        SOLVED: False,
-        UP: 'b2',
-        DOWN: '',
-        LEFT: 'c1',
-        RIGHT: 'c3',
-    },
-    'c3': {
-        ZONENAME: "",
-        DESCRIPTION: 'description',
-        EXAMINATION: 'examine',
-        SOLVED: False,
-        UP: 'b3',
-        DOWN: '',
-        LEFT: 'c2',
-        RIGHT: 'c4',
-    },
-    'c4': {
-        ZONENAME: "",
-        DESCRIPTION: 'description',
-        EXAMINATION: 'examine',
-        SOLVED: False,
-        UP: 'b4',
-        DOWN: '',
-        LEFT: 'c3',
-        RIGHT: '',
-    }
-}
+def takes_cake():
+    myPlayer.health_points += 10
+    print("You gained 10 hp")
+    print(f"Health: {myPlayer.health_points}")
+    print("Now the people ask you to follow them.\n")
+    print("But you're distracted by a man holding a chest.\n")
+    print("Do you follow the people or go to the man?")
+    option = input("> ")
+    if "follow" in option:
+        follow_people()
+    elif "go" in option:
+        go_to_man()
 
-#### Game Interactivity ####
-def print_location():
-    print('\n' + ('#' * (4 + len(myPlayer.location))))
-    print('#' + myPlayer.location.upper() + '#')
-    print('#' + zonemap[myPlayer.location][DESCRIPTION] + '#')
-    print('\n' + ('#' * (4 + len(myPlayer.location))))
+def follow_people():
+    myPlayer.health_points = 0
+    print("The locals jumped you and took everything you have.")
+    print(f"Health: {myPlayer.health_points}")
+    game_over()
 
-def prompt():
-    print("What would you like to do?")
-    # NOTE: THIS IS A TEST BELOW
-    zonemap[myPlayer.location]['EVENTFN']()
-    action = input("> ")
-    acceptable_actions = ['move', 'go', 'travel', 'walk', 'quit', 'examine', 'inspect', 'interact', 'look']
-    while action.lower() not in acceptable_actions:
-        print("Unknown action, try again.\n")
-        action = input("> ")
-    if action.lower() == 'quit':
-        sys.exit()
-    elif action.lower() in ['move', 'go', 'travel', 'walk']:
-        player_move()
-    elif action.lower() in ['examine', 'inspect', 'intersact', 'look']:
-        player_examine(action.lower())
+def go_to_man():
+        myPlayer.magic_points += 100
+        print("He gave you a potion that boosts your MAGIC POWER!!!\n")
+        print(f"Your magic level is now {myPlayer.magic_points}")
 
-def player_move(myAction):
-    ask = "Where would you like to move to?\n"
-    dest = input(ask)
-    if dest in ['up', 'north']:
-        destination = zonemap[myPlayer.location][UP]
-        movement_handler(destination)
-    elif dest in ['left', 'west']:
-        destination = zonemap[myPlayer.location][LEFT]
-        movement_handler(destination)
-    elif dest in ['right', 'east']:
-        destination = zonemap[myPlayer.location][RIGHT]
-        movement_handler(destination)
-    elif dest in [ 'down', 'south' ]:
-        destination = zonemap[myPlayer.location][DOWN]
-        movement_handler(destination)
+def fighting_lessons():
+    pass
+
+def town_two():
+    pass
+
+def game_over():
+        print(f"Thank you for playing {myPlayer.name}.")
+        ask_to_play_again()
+
+def ask_to_play_again():
+        decision = input("Do you want to play again? (yes/no): ").lower()
+        if decision == "yes":
+            restart_game()
+        elif decision == "no":
+            print(f"Thank you for playing! Goodbye, {myPlayer.name}. You wuss")
+        else:
+            print("Invalid command. Please answer with 'yes' or 'no'.")
+            ask_to_play_again()
+
+def restart_game():
+        print("Restarting the game...\n")
+        title_screen()
 
 
-def movement_handler(destination):
-    print("\n" + "You have moved to the" + destination + ".")
-    myPlayer.location = destination
-    print_location()
-
-def player_examine(action):
-    if zonemap[myPlayer.location][SOLVED] == True:
-        print("You have already exhausted this zone.")
-    else:
-        print("Trigger puzzle here")
+    
 
 
-
-
-#### Game Functionality ####
+    
+ 
 def main_game_loop():
-    while myPlayer.game_over is False:
-        prompt()
-
+        while myPlayer.game_over is False:
+            enter_town()
 def setup_game():
     os.system('clear')
 
@@ -352,33 +233,21 @@ def setup_game():
     for character in speech2:
         sys.stdout.write(character)
         sys.stdout.flush()
-        time.sleep(0.01)
+        time.sleep(0)
     for character in speech3:
         sys.stdout.write(character)
         sys.stdout.flush()
-        time.sleep(0.01)   
+        time.sleep(0)   
     for character in speech4:
         sys.stdout.write(character)
         sys.stdout.flush()
-        time.sleep(0.1)
-
-    os.system('clear')
-    print('#########################')
-    print('#    Let start now   #')
-    print('#########################')
-    main_game_loop()
+        time.sleep(0)
 
     os.system("clear")
     print("##########################")
     print("#    Let the game begin! #")
     print("##########################")
     main_game_loop()
-
-
-
-
-
-
 
 
 
