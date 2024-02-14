@@ -104,7 +104,7 @@ def enter_town():
 zonemap = {
     'a1': {
         ZONENAME: 'Town Entrance',
-        DESCRIPTION: 'description',
+        DESCRIPTION: 'This is the entrance to a town of baddies',
         EXAMINATION: 'examine',
         SOLVED: False,
         UP: '',
@@ -227,15 +227,16 @@ zonemap = {
 
 #### Game Interactivity ####
 def print_location():
-    print('\n' + ('#' * (4 + len(myPlayer.location))))
+    print('\n' + 'YOU ARE AT')
     print('#' + myPlayer.location.upper() + '#')
     print('#' + zonemap[myPlayer.location][DESCRIPTION] + '#')
     print('\n' + ('#' * (4 + len(myPlayer.location))))
 
 def prompt():
-    print("What would you like to do?")
+    print_location()
     # NOTE: THIS IS A TEST BELOW
     zonemap[myPlayer.location]['EVENTFN']()
+    print("What would you like to do?")
     action = input("> ")
     acceptable_actions = ['move', 'go', 'travel', 'walk', 'quit', 'examine', 'inspect', 'interact', 'look']
     while action.lower() not in acceptable_actions:
