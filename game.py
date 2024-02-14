@@ -1,69 +1,3 @@
-
-# class Warrior:
-
-#     def __init__(self, name, hp, attack_points, magic_points, status_effect):
-#         self.name = name
-#         self.hp = hp
-#         self.attack_points = attack_points
-#         self.magic_points = magic_points 
-#         self.status_effect = status_effect
-
-#     @property
-#     def name(self):
-#         return self._name
-
-#     @name.setter
-#     def name(self, name):
-#         if type(name) == str:
-#             self._name = name
-#         else:
-#             raise Exception("Warrior name must be a string")
-        
-#     @property
-#     def hp(self):
-#         return self._hp
-    
-#     @hp.setter
-#     def hp(self, hp):
-#         if type(hp) == int:
-#             self._hp = hp
-#         else:
-#             raise Exception("HP must be an Integer")
-        
-#     @property
-#     def attack_points(self):
-#         return self._attack_points
-    
-#     @attack_points.setter
-#     def attack_points(self, attack_points):
-#         if type(attack_points) == int:
-#             self._attack_points = attack_points
-#         else:
-#             raise Exception("Attack Points must be an Integer")
-        
-#     @property
-#     def magic_points(self):
-#         return self._magic_points
-    
-#     @magic_points.setter
-#     def magic_points(self, magic_points):
-#         if type(magic_points) == int:
-#             self._magic_points = magic_points
-#         else:
-#             raise Exception("Magic point was not and Integer")
-
-
-#     @property
-#     def status_effect(self):
-#         return self._status_effect
-    
-#     @status_effect.setter
-#     def status_effect(self, status_effect):
-#         if type(status_effect) == int:
-#             self._status_effect = status_effect
-#         else:
-#             raise Exception("Status points was not an Integer")
-
 import cmd 
 import textwrap 
 import sys 
@@ -71,21 +5,23 @@ import os
 import time 
 import random 
 
+
 screen_width = 100
 
 
 #### Player Setup ####
-class Rogue():
+class Player():
 
     def __init__(self):
-        self.name = "Jaeem"
-        self.role = Rogue
-        self.health_points = 100
-        self.attack_points = 250
-        self.magic_points = 10
-        self.location = 'start'
+        self.name = ""
+        self.role = ""
+        self.health_points = 0
+        self.attack_points = 0
+        self.magic_points = 0
+        self.location = 'a1'
         self.game_over = False
-myPlayer = Rogue()
+
+myPlayer = Player()
 
 
 #### Title Screen ####
@@ -97,11 +33,11 @@ def title_screen_selections():
     elif option.lower() == ("help"):
         help_menu()
     elif option.lower() == ("quit"):
-        sys.exit()
+        sys.exit()#####
     while option.lower() not in ['play' , 'help' , 'quit']:
         print("Please enter a valid command")
         if option.lower() == ("play"):
-            start_game()
+            setup_game()
         elif option.lower() == ("help"):
             help_menu()
         elif option.lower() == ("quit"):
@@ -156,6 +92,13 @@ solved_places = { 'a1': False, 'a2': False, 'a3': False, 'a4': False,
                   'c1': False, 'c2': False, 'c3': False, 'c4': False,
                 }
 
+def enter_town():
+    print("You are at the entrance to town")
+    print("You got beat up by some baddies")
+    myPlayer.health_points -= 10
+    print(f"Your health is now {myPlayer.health_points}")
+    print("Carry on")
+
 zonemap = {
     'a1': {
         ZONENAME: 'Town Entrance',
@@ -166,6 +109,7 @@ zonemap = {
         DOWN: 'b1',
         LEFT: '',
         RIGHT:'a2',
+        "EVENTFN": enter_town
     },
     'a2': {
         ZONENAME: '',
@@ -283,11 +227,13 @@ zonemap = {
 def print_location():
     print('\n' + ('#' * (4 + len(myPlayer.location))))
     print('#' + myPlayer.location.upper() + '#')
-    print('#' + zonemap[myPlayer.location][DESCRPTION] + '#')
+    print('#' + zonemap[myPlayer.location][DESCRIPTION] + '#')
     print('\n' + ('#' * (4 + len(myPlayer.location))))
 
 def prompt():
     print("What would you like to do?")
+    # NOTE: THIS IS A TEST BELOW
+    zonemap[myPlayer.location]['EVENTFN']()
     action = input("> ")
     acceptable_actions = ['move', 'go', 'travel', 'walk', 'quit', 'examine', 'inspect', 'interact', 'look']
     while action.lower() not in acceptable_actions:
@@ -296,7 +242,7 @@ def prompt():
     if action.lower() == 'quit':
         sys.exit()
     elif action.lower() in ['move', 'go', 'travel', 'walk']:
-        player_move(action.lower())
+        player_move()
     elif action.lower() in ['examine', 'inspect', 'intersact', 'look']:
         player_examine(action.lower())
 
@@ -328,8 +274,6 @@ def player_examine(action):
     else:
         print("Trigger puzzle here")
 
-def start_game():
-    return
 
 
 #### Game Functionality ####
@@ -344,7 +288,7 @@ def setup_game():
     for character in q1:
         sys.stdout.write(character)
         sys.stdout.flush()
-        time.sleep(0.01)
+        time.sleep(0.05)
     player_name = input("> ")
     myPlayer.name = player_name
 
@@ -355,39 +299,71 @@ def setup_game():
         time.sleep(0.05)
     player_role = input("> ")
     valid_roles = ["warrior", "mage", "rogue", "priest", "hunter"]
+    while player_role.lower() not in valid_roles:
+        print("Not a valid role")
+        player_role = input("> ")
     if player_role.lower() in valid_roles:
         print("You are now a " + player_role + "!\n")
         myPlayer.role = player_role
+    # import ipdb; ipdb.set_trace()
+    
+    if myPlayer.role == 'warrior':
+        myPlayer.health_points = 300
+        myPlayer.attack_points = 250
+        myPlayer.magic_points = 0
+    elif myPlayer.role == 'mage':
+        myPlayer.health_points = 150
+        myPlayer.attack_points = 100
+        myPlayer.magic_points = 200
+    elif myPlayer.role == 'rogue':
+        myPlayer.health_points = 100
+        myPlayer.attack_points = 300
+        myPlayer.magic_points = 150
+    elif myPlayer.role == 'priest':
+        myPlayer.health_points = 150
+        myPlayer.attack_points = 150
+        myPlayer.magic_points = 150
+    elif myPlayer.role == 'hunter':
+        myPlayer.health_points =200
+        myPlayer.attack_points = 150
+        myPlayer.magic_points = 100
+
     
 
-    q3 = "Welcome, " + player_name + " the " + player_role
+    q3 = "Welcome, " + player_name + " the " + player_role + ".\n"
     for character in q3:
         sys.stdout.write(character)
         sys.stdout.flush()
         time.sleep(0.05)
-    player_name = input(">")
-    myPlayer.name = player_name
+    # player_name = input(">")
+    # myPlayer.name = player_name
 
-    speech1 = "Welcome to this fantasy world!"
-    speech2 = "I hope its greets you well!"
-    speech3 = "Just make sure you don't get too lost...!"
-    speech4 = "HEHEHEHEHEH....."
+    speech1 = "Welcome to this fantasy world!\n"
+    speech2 = "I hope its greets you well!\n"
+    speech3 = "Just make sure you don't get too lost...!\n"
+    speech4 = "HEHEHEHEHEH.....\n"
     for character in speech1:
         sys.stdout.write(character)
         sys.stdout.flush()
-        time.sleep(0.05)
+        time.sleep(0.01)
     for character in speech2:
         sys.stdout.write(character)
         sys.stdout.flush()
-        time.sleep(0.05)
+        time.sleep(0.01)
     for character in speech3:
         sys.stdout.write(character)
         sys.stdout.flush()
-        time.sleep(0.05)   
+        time.sleep(0.01)   
     for character in speech4:
         sys.stdout.write(character)
         sys.stdout.flush()
-        time.sleep(0.05)
+        time.sleep(0.1)
+
+    os.system('clear')
+    print('#########################')
+    print('#    Let start now   #')
+    print('#########################')
+    main_game_loop()
 
 
 
@@ -400,3 +376,6 @@ def setup_game():
 
 
 title_screen()
+
+
+
