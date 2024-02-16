@@ -335,12 +335,15 @@ def grab_halal():
     print(" ,-='  /  |  \  `=-.")
     print(":--..___________..--;")
     print(" \.,_____________,./")
-
     print("You go to the nearby halal cart and greet the man.\n")
     print("He asks you what you wants you go ahead and order....\n")
+    end_game()
+    
+    
+def end_game():
     option = input("> ")
-    s1 = "The man in the cart look at you and says"
-    s2 = f"*No the real {option} is the friends you made along the way\n"
+    s1 = "The man in the cart look at you and says\n"
+    s2 = f"No the real {option} is the friends you made along the way\n"
     s3 = "*Dramatic music starts to play*\n"
     s4 = "You stand there hungry and confused...wondering what freinds he even meant...............\n"
     for character in s1:
@@ -354,13 +357,14 @@ def grab_halal():
     for character in s3:
         sys.stdout.write(character)
         sys.stdout.flush()
-        time.sleep(0.03)   
+        time.sleep(0.03) 
     for character in s4:
         sys.stdout.write(character)
         sys.stdout.flush()
-        time.sleep(0.03)   
-    print("*No son, the combo over r")
-    game_over()
+        time.sleep(0.03)  
+    print(f"Thank you for playing {myPlayer.name}.")
+    ask_to_play_again()
+
 
 
 def follow_man_in_black():
@@ -421,7 +425,7 @@ def skill_test():
     print(f"You use your ATTACK with your {myPlayer.weapon} to kill the monster!!!!!!!\n")
     print("You fought a hard battle and took some damage\n")
     myPlayer.health_points -=20
-    print(f"{myPlayer.health_points}")
+    print(f"Health: {myPlayer.health_points}")
     print("Do you want to a HEALER to regain health or grab some FOOD to recover.\n'")
     option = input('> ')
     if "healer" in option:
