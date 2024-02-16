@@ -105,8 +105,13 @@ def help_menu():
 
 
 def enter_first_town():
+    print(" _   |~  _")
+    print("[_]--'--[_]")
+    print("|'|""`""|'|")
+    print("| | /^\ | |")
+    print("|_|_|I|_|_|")
     s1 = "You are at the entrance to town \n"
-    s2 ="You see the town is under attack by some bandits!!!\n"
+    s2 = "You see the town is under attack by some bandits!!!\n"
     s3 = "Desperate townsfolk seek the help of a brave hero (you).\n"
     s4 = "Do you HELP the people or LEAVE this town\n"
     for character in s1:
@@ -133,11 +138,21 @@ def enter_first_town():
     else:
         print("Stick to the adventure!")
         os.system('clear')
-        
 
 def stop_bandits():
     os.system('clear')
-    print("You wipe the floor with the bandits, but one of them lands a sucker punch")
+    print("         __")
+    print("         | \      _")
+    print("      ==='=='==  (o>")
+    print("         \++/   / )")
+    print("__.-------------^^-.__")
+    print("   \----.  : .----/")
+    print("         \_/\|          ()")
+    print("         / _ \       _  \/()")
+    print("        / /|\ \     |/| | \/")
+    print("      _/_/ | \_\_     | |//")
+    print("     /_/   |   \_\    \_\|")
+    print("You wipe the floor with the bandits, but one of them lands a sucker punch.\n")
     myPlayer.health_points -= 1
     print(f"Health: {myPlayer.health_points}")
     s1 = "The townsfolk cheer in relief and celebrate your victory.\n"
@@ -166,6 +181,13 @@ def stop_bandits():
 
 def next_morning():
     os.system('clear')
+    print("        .")
+    print("      \ | /")
+    print("    '-.;;;.-'")
+    print("   -==;;;;;==-")
+    print("    .-';;;'-.")
+    print("      / | \ ")
+    print("        '")
     myPlayer.health_points += 11
     print("You wake up rejuvinated.")
     print(f"Health: {myPlayer.health_points}")
@@ -237,6 +259,11 @@ def rizz_maiden():
 
 def explore_town_one():
     os.system('clear')
+    print(" _   |~  _")
+    print("[_]--'--[_]")
+    print("|'|""`""|'|")
+    print("| | /^\ | |")
+    print("|_|_|I|_|_|")
     print("The town is quite small and not a lot happens this early.")
     s1 = "You find an old man riding a wagaon heading to the next town"
     s2 = "Do you want to TAKE his wagon and ride off with it..."
@@ -265,9 +292,13 @@ def explore_town_one():
         print("Stick to the adventure!")
         os.system('clear')
 
-
 def town_two():
     os.system('clear')
+    print(" _   |~  _")
+    print("[_]--'--[_]")
+    print("|'|""`""|'|")
+    print("| | /^\ | |")
+    print("|_|_|I|_|_|")
     print("You've finally arrived to a new town\n")
     print("You see the sign, it's called Iron Flat\n")
     print("Although bigger than the last, this town also seems much more menacing\n")
@@ -302,8 +333,15 @@ def town_two():
 
 def grab_halal():
     os.system('clear')
-    print("You go to the nearby halal cart and freet the man.\n")
-    print("He asks you what yoou wants you go ahead and order....\n")
+    print("         (")
+    print("          )")
+    print("     __..---..__")
+    print(" ,-='  /  |  \  `=-.")
+    print(":--..___________..--;")
+    print(" \.,_____________,./")
+
+    print("You go to the nearby halal cart and greet the man.\n")
+    print("He asks you what you wants you go ahead and order....\n")
     option = input("> ")
     s1 = "The man in the cart look at you and says"
     s2 = f"*No the real {option} is the friends you made along the way\n"
@@ -321,16 +359,34 @@ def grab_halal():
         sys.stdout.write(character)
         sys.stdout.flush()
         time.sleep(0.03)   
+    for character in s4:
+        sys.stdout.write(character)
+        sys.stdout.flush()
+        time.sleep(0.03)   
+    print("*No son, the combo over r")
     game_over()
 
-    
-
-
-    print("*No son, the combo over r")
 
 def follow_man_in_black():
     os.system('clear')
-
+    print("           .-----.")
+    print(" \ ' /   _/    )/")
+    print("- ( ) -('---''--)")
+    print(" / . \((()\^_^/)()")
+    print("  \\_\ (()_)-((()()")
+    print("   '- \ )/\._./(()")
+    print("     '/\/( X   ) \ ")
+    print("     (___)|___/ ) \ ")
+    print("          |.#_|(___)")
+    print("         /\    \ ( (_")
+    print("         \/\/\/\) \\")
+    print("         | / \ |")
+    print("         |(   \|")
+    print("        _|_)__|_\_")
+    print("        )...()...(")
+    print("         | (   \ |     ")
+    print("      .-'__,)  (  \ ")
+    print("               '\_-,")
     myPlayer.magic_points += 100
     print("He gave you a potion that boosts your MAGIC POWER!!!\n")
     print(f"Your magic level is now {myPlayer.magic_points}\n")
@@ -352,7 +408,7 @@ def fighting_lessons():
     myPlayer.attack_points += 10 
     print("You meet with the man in black and do vigorous training\n")
     print(f"Your attributes are now - Magic:{myPlayer.magic_points}, Attack:{myPlayer.attack_points}, HP:{myPlayer.health_points} -\n")
-    print("Do you want to TEST your skills or GO away")
+    print("Do you want to TEST your skill or GO away")
     option = input("> ")
     if "test" in option:
         skill_test()
@@ -382,6 +438,23 @@ def skill_test():
 
 def go_to_healer():
     os.system('clear')
+    print(" /////////////\\\\")
+    print("(((((((((((((( \\\\")
+    print("))) ~~      ~~  (((")
+    print("((( (*)     (*) )))")
+    print(")))     <       (((")
+    print("((( '\______/`  )))")
+    print(")))\___________/(((")
+    print("       _) (_")
+    print("      / \_/ \ ")
+    print("     /(     )\ ")
+    print("    // )___( \\")
+    print("    \\(     )//")
+    print("     (       )")
+    print("      |  |  |")
+    print("       | | |")
+    print("       | | |")
+    print("      _|_|_|_")
     print("You go to the temple down the road and pay the healer to help you")
     print("The healer has healed you.\n")
     myPlayer.dabloons -= 100
@@ -400,6 +473,11 @@ def go_to_healer():
 
 def town_three():
     os.system('clear')
+    print(" _   |~  _")
+    print("[_]--'--[_]")
+    print("|'|""`""|'|")
+    print("| | /^\ | |")
+    print("|_|_|I|_|_|")
     print("The civilians welcome you into their town.\n")
     print(f"The King notices you are in town and requests your help {myPlayer.name}.\n")
     print("Do you wish to take on the request reply? (yes/no)")
@@ -419,9 +497,9 @@ def defend_town():
     elif "no" in option:
         grab_halal()  
 
-
 def fight_monster():
     os.system('clear')
+
     print(f"Night comes and the monster {myMonster.name} tries to enter town.\n")
     print("The civilians ask for your help to fight the monster.\n")
     print(f"The monster has great attributes HP:{myMonster.health_points}, Attack:{myMonster.attack_points}, Magic;{myMonster.magic_points}\n")
@@ -434,6 +512,23 @@ def fight_monster():
 
 def seek_healer():
     os.system('clear')
+    print(" /////////////\\\\")
+    print("(((((((((((((( \\\\")
+    print("))) ~~      ~~  (((")
+    print("((( (*)     (*) )))")
+    print(")))     <       (((")
+    print("((( '\______/`  )))")
+    print(")))\___________/(((")
+    print("       _) (_")
+    print("      / \_/ \ ")
+    print("     /(     )\ ")
+    print("    // )___( \\")
+    print("    \\(     )//")
+    print("     (       )")
+    print("      |  |  |")
+    print("       | | |")
+    print("       | | |")
+    print("      _|_|_|_")
     myPlayer.health_points -= 70
     print("You got taken back to town")
     print(f"You are badly injured HP:{myPlayer.health_points}")
@@ -446,8 +541,6 @@ def seek_healer():
         myPlayer.health_points == 100
         skill_test()
     
-
-
 def game_over():
         print(f"Thank you for playing {myPlayer.name}.")
         ask_to_play_again()
@@ -465,7 +558,6 @@ def ask_to_play_again():
 def restart_game():
         print("Restarting the game...\n")
         title_screen()
-
 
 def main_game_loop():
         while myPlayer.game_over is False:
@@ -530,10 +622,6 @@ def setup_game():
         myPlayer.weapon = "Crossbow"
         myPlayer.dabloons = 100
         show_stats()
-
-
-
-    
 
     q3 = "A " + player_role + "!" + " Perfect test sub-... lab ra-.... *cough* HERO for this adventure" ".\n"
     for character in q3:
