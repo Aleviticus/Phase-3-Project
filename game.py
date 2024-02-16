@@ -60,32 +60,29 @@ def title_screen_selections():
 
 def title_screen():
     os.system('clear')
-    print('###########################################################')
-    print('         _______ _       _______ _______ _______ ______') 
-    print('|\     /(  ____ ( \     (  ____ (  ___  (       (  ____ \ ')
-    print('| )   ( | (    \| (     | (    \| (   ) | () () | (    \/')
-    print('| | _ | | (__   | |     | |     | |   | | || || | (__    ')
-    print('| |( )| |  __)  | |     | |     | |   | | |(_)| |  __)   ')
-    print('| || || | (     | |     | |     | |   | | |   | | (      ')
-    print('| () () | (____/| (____/| (____/| (___) | )   ( | (____/\ ')
-    print('(_______(_______(_______(_______(_______|/     \(_______/')
-    print('###########################################################')
-    print('                        - PLAY -                           ')
-    print('                        - HELP -                           ')
-    print('                        - QUIT -                           ')
+    print('####################################################################################################################')
+    print("                                                                   .;                                               ")
+    print(".;.       .-..;      .-.                      .-.                 .;' .;.       .-.                  .'             ")
+    print("  `;     ;'  ;;-.    `-' . ,';.,';.      .    `-' .-.   .-.      .;     `;     ;' .-.    . ,';. .-..'  .-.   .;.::. ")
+    print("   ;;    ;  ;;  ;   ;'   ;;  ;;  ;;    .';   ;'  ;     ;   :    ::       ;;    ; ;   :   ;;  ;;:   ; .;.-'   .;     ")
+    print("  ;;  ;  ;;.;`  `_.;:._.';  ;;  ';   .' .'_.;:._.`;;;;'`:::'-'_;;_.-    ;;  ;  ;;`:::'-'';  ;; `:::'`.`:::'.;'      ")
+    print("  `;.' `.;'            _;        `-''                                   `;.' `.;'       ;    `.                     ")
+    print('####################################################################################################################')
+    print('                                                    - PLAY -                                                        ')
+    print('                                                    - HELP -                                                        ')
+    print('                                                    - QUIT -                                                        ')
     title_screen_selections()
+
 
 def help_menu():
     os.system('clear')
     print('###########################################################')
-    print('         _______ _       _______ _______ _______ ______') 
-    print('|\     /(  ____ ( \     (  ____ (  ___  (       (  ____ \ ')
-    print('| )   ( | (    \| (     | (    \| (   ) | () () | (    \/')
-    print('| | _ | | (__   | |     | |     | |   | | || || | (__    ')
-    print('| |( )| |  __)  | |     | |     | |   | | |(_)| |  __)   ')
-    print('| || || | (     | |     | |     | |   | | |   | | (      ')
-    print('| () () | (____/| (____/| (____/| (___) | )   ( | (____/\ ')
-    print('(_______(_______(_______(_______(_______|/     \(_______/')
+    print("                                                                   .;                                               ")
+    print(".;.       .-..;      .-.                      .-.                 .;' .;.       .-.                  .'             ")
+    print("  `;     ;'  ;;-.    `-' . ,';.,';.      .    `-' .-.   .-.      .;     `;     ;' .-.    . ,';. .-..'  .-.   .;.::. ")
+    print("   ;;    ;  ;;  ;   ;'   ;;  ;;  ;;    .';   ;'  ;     ;   :    ::       ;;    ; ;   :   ;;  ;;:   ; .;.-'   .;     ")
+    print("  ;;  ;  ;;.;`  `_.;:._.';  ;;  ';   .' .'_.;:._.`;;;;'`:::'-'_;;_.-    ;;  ;  ;;`:::'-'';  ;; `:::'`.`:::'.;'      ")
+    print("  `;.' `.;'            _;        `-''                                   `;.' `.;'       ;    `.                     ")
     print('###########################################################')
     print(' -  Warriors are brutes who have no magic power to begin with -')
     print(' -  Mages excel in magic whilst having decent combat. -')
@@ -142,7 +139,7 @@ def stop_bandits():
     print(f"Health: {myPlayer.health_points}")
     s1 = "The townsfolk cheer in relief and celebrate your victory.\n"
     s2 = "The owner of the local inn offers you to stay the night for free.\n"
-    s3 = "Do you want to REST the night or CONTINUE on?"
+    s3 = "Do you want to REST the night or CONTINUE on?\n"
     for character in s1:
         sys.stdout.write(character)
         sys.stdout.flush()
@@ -302,8 +299,12 @@ def town_two():
 
 def grab_halal():
     os.system('clear')
-    print("You go to the nearby halal cart and freet the man.\n")
-    print("He asks you what yoou wants you go ahead and order....\n")
+    print("You go to the nearby halal cart and greet the man.\n")
+    print("He asks you what you wants you go ahead and order....\n")
+    end_game()
+    
+    
+def end_game():
     option = input("> ")
     s1 = "The man in the cart look at you and says"
     s2 = f"*No the real {option} is the friends you made along the way\n"
@@ -320,13 +321,17 @@ def grab_halal():
     for character in s3:
         sys.stdout.write(character)
         sys.stdout.flush()
-        time.sleep(0.03)   
-    game_over()
+        time.sleep(0.03) 
+    for character in s3:
+        sys.stdout.write(character)
+        sys.stdout.flush()
+        time.sleep(0.03)  
+    print(f"Thank you for playing {myPlayer.name}.")
+    ask_to_play_again()
 
     
 
 
-    print("*No son, the combo over r")
 
 def follow_man_in_black():
     os.system('clear')
